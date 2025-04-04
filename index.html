@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netflix Portfolio</title>
+    <meta name="description" content="Portfolio showcasing creative work with a Netflix-inspired design" />
+    <meta name="author" content="Portfolio Creator" />
+
+    <meta property="og:title" content="Netflix Portfolio" />
+    <meta property="og:description" content="Portfolio showcasing creative work with a Netflix-inspired design" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="js\js\styles.css" />
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  
+
+  <body>
+    <div id="root">
+      <!-- Header/Navbar -->
+      <header id="navbar">
+        <div class="netflix-container">
+          <div class="nav-content">
+            <a href="index.html" class="logo">RON'S PORTFOLIO</a>
+            
+            <nav class="desktop-nav">
+              <a href="index.html" class="nav-link">Home</a>
+              <a href="about.html" class="nav-link">About</a>
+              <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            
+            <div class="nav-actions">
+              <button class="icon-button search-button">
+                <i class="fas fa-search"></i>
+              </button>
+              
+              <button id="mobile-menu-button" class="icon-button mobile-only">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+          <div class="menu-content">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="about.html" class="mobile-link">About</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+          </div>
+        </div>
+      </header>
+      <!-- Profile Section -->
+<section id="profile" class="profile-container">
+  <div class="netflix-container profile-content">
+    <img src="img\RON.jpg" alt="Ronnie's Profile Picture" class="profile-pic" />
+    <div class="profile-text">
+      <h2>Ron Moen</h2>
+      <p>
+        Hi, I'm Ron – a passionate software developer with a strong foundation in Python, Django, JavaScript, and front-end technologies. I’m enthusiastic about building innovative web applications that solve real-world problems.
+
+        As a data analyst, I have honed my skills in data-driven decision-making, and I’m also deeply passionate about AI and training models to create smarter, more efficient systems.
+        
+        I am always eager to learn, experiment, and take on new challenges to grow both technically and professionally.
+      </p>
+    </div>
+  </div>
+</section>
+
+      
+      <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-container">
+          <div class="hero-media">
+            <!-- Hero image or video will be inserted by JavaScript -->
+          </div>
+          
+          <div class="hero-gradient"></div>
+          
+          <div class="netflix-container hero-content">
+            <div class="hero-text">
+              <span class="category-pill">Featured</span>
+              <h1 class="hero-title">E-Commerce Platform Redesign</h1>
+              <p class="hero-description">
+                A complete overhaul of an e-commerce platform focusing on user experience and conversion optimization.
+              </p>
+              <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">
+                  <i class="fas fa-play"></i> View Project
+                </a>
+                <a href="#" class="btn btn-secondary">
+                  <i class="fas fa-info-circle"></i> More Info
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Content Rows -->
+        <div class="netflix-container content-rows">
+          <!-- Rows will be inserted by JavaScript -->
+        </div>
+      </main>
+      
+      <!-- Footer -->
+      <footer class="site-footer">
+        <div class="netflix-container">
+          <div class="footer-grid">
+            <div class="footer-column">
+              <a href="index.html" class="footer-logo">PORTFOLIO</a>
+              <p class="footer-description">
+                Showcasing creative work with passion and dedication. Building digital experiences that make an impact.
+              </p>
+            </div>
+            
+            <div class="footer-column">
+              <h3 class="footer-heading">Navigation</h3>
+              <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+            </div>
+            
+            <div class="footer-column">
+              <h3 class="footer-heading">Connect</h3>
+              <div class="social-links">
+                <a href="https://github.com/ron-crypto" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/ron-moen-b26024228/" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="moenron8@gmail.com">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="footer-bottom">
+            <p class="copyright">
+              &copy; <span id="current-year"></span> Portfolio. All rights reserved.
+            </p>
+            <div class="footer-tagline">
+              Designed and built with passion
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+
+    
+    <!-- JavaScript -->
+    <script src="js\Data.js"></script>
+    <script src="js\js\main.js"></script>
+  </body>
+</html>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+</script>

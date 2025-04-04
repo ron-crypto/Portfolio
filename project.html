@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Detail - Netflix Portfolio</title>
+    <meta name="description" content="Detailed view of portfolio project" />
+    <meta name="author" content="Portfolio Creator" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="js\js\styles.css" />
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+      /* Project detail page specific styles */
+      .project-detail {
+        padding-top: 60px;
+      }
+      
+      .project-hero {
+        position: relative;
+        height: 70vh;
+        width: 100%;
+      }
+      
+      .project-media {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      
+      .project-media img,
+      .project-media video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+      
+      .project-media img.loaded,
+      .project-media video.loaded {
+        opacity: 1;
+      }
+      
+      .project-gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, 
+          rgba(20, 20, 20, 0) 0%, 
+          rgba(20, 20, 20, 0.8) 70%, 
+          var(--netflix-black) 100%);
+      }
+      
+      .project-header {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding-bottom: 60px;
+        z-index: 2;
+      }
+      
+      .project-meta {
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      
+      .project-year {
+        color: var(--netflix-lightgray);
+        font-size: 1rem;
+      }
+      
+      .project-title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        line-height: 1.2;
+      }
+      
+      @media (min-width: 768px) {
+        .project-title {
+          font-size: 4rem;
+        }
+      }
+      
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      
+      .project-tag {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 4px 12px;
+        border-radius: 16px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+      
+      .project-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 60px 0;
+      }
+      
+      .project-description {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--netflix-lightgray);
+        margin-bottom: 40px;
+      }
+      
+      .project-action {
+        margin-top: 40px;
+      }
+      
+      .project-action-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: var(--netflix-red);
+        color: white;
+        padding: 12px 24px;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background-color 0.2s ease;
+      }
+      
+      .project-action-link:hover {
+        background-color: #c11119;
+      }
+      
+      .related-projects {
+        padding: 40px 0 60px;
+        background-color: var(--netflix-dark);
+      }
+      
+      .related-heading {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 24px;
+      }
+      
+      .back-button {
+        position: absolute;
+        top: 80px;
+        left: 20px;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease;
+      }
+      
+      .back-button:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      
+      @media (min-width: 768px) {
+        .back-button {
+          top: 100px;
+          left: 40px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root">
+      <!-- Header/Navbar -->
+      <header id="navbar">
+        <div class="netflix-container">
+          <div class="nav-content">
+            <a href="index.html" class="logo">PORTFOLIO</a>
+            
+            <nav class="desktop-nav">
+              <a href="index.html" class="nav-link">Home</a>
+              <a href="about.html" class="nav-link">About</a>
+              <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            
+            <div class="nav-actions">
+              <button class="icon-button search-button">
+                <i class="fas fa-search"></i>
+              </button>
+              
+              <button id="mobile-menu-button" class="icon-button mobile-only">
+                <i class="fas fa-bars"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+          <div class="menu-content">
+            <a href="index.html" class="mobile-link">Home</a>
+            <a href="about.html" class="mobile-link">About</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+          </div>
+        </div>
+      </header>
+      
+      <main class="project-detail">
+        <a href="index.html" class="back-button">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <section class="project-hero">
+          <div class="project-media">
+            <!-- Project media will be inserted by JavaScript -->
+          </div>
+          
+          <div class="project-gradient"></div>
+          
+          <div class="netflix-container project-header">
+            <div class="project-meta">
+              <span class="category-pill" id="project-category">Category</span>
+              <span class="project-year" id="project-year">Year</span>
+            </div>
+            
+            <h1 class="project-title" id="project-title">Project Title</h1>
+            
+            <div class="project-tags" id="project-tags">
+              <!-- Tags will be inserted by JavaScript -->
+            </div>
+          </div>
+        </section>
+        
+        <section class="netflix-container project-content">
+          <div class="project-description" id="project-description">
+            <!-- Description will be inserted by JavaScript -->
+          </div>
+          
+          <div class="project-action" id="project-action">
+            <!-- Action button will be inserted by JavaScript if needed -->
+          </div>
+        </section>
+        
+        <section class="related-projects">
+          <div class="netflix-container">
+            <h2 class="related-heading">More Projects</h2>
+            
+            <div class="slider-container">
+              <div class="slider" id="related-projects">
+                <!-- Related projects will be inserted by JavaScript -->
+              </div>
+              
+              <div class="slider-controls">
+                <div class="slider-arrow left-arrow">
+                  <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="slider-arrow right-arrow">
+                  <i class="fas fa-chevron-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      
+      <!-- Footer -->
+      <footer class="site-footer">
+        <div class="netflix-container">
+          <div class="footer-grid">
+            <div class="footer-column">
+              <a href="index.html" class="footer-logo">PORTFOLIO</a>
+              <p class="footer-description">
+                Showcasing creative work with passion and dedication. Building digital experiences that make an impact.
+              </p>
+            </div>
+            
+            <div class="footer-column">
+              <h3 class="footer-heading">Navigation</h3>
+              <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+            </div>
+            
+            <div class="footer-column">
+              <h3 class="footer-heading">Connect</h3>
+              <div class="social-links">
+                <a href="https://github.com/ron-crypto" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/ron-moen-b26024228/" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="moenron8@gmail.com">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="footer-bottom">
+            <p class="copyright">
+              &copy; <span id="current-year"></span> Portfolio. All rights reserved.
+            </p>
+            <div class="footer-tagline">
+              Designed and built with passion
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+
+    
+    <!-- JavaScript -->
+    <script src="js\Data.js"></script>
+    <script src="js\js\main.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get project ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const projectId = params.get('id');
+        
+        if (!projectId) {
+          window.location.href = 'index.html';
+          return;
+        }
+        
+        // Get project data
+        const project = getProjectById(projectId);
+        
+        if (!project) {
+          window.location.href = 'index.html';
+          return;
+        }
+        
+        // Update page title
+        document.title = `${project.title} - Netflix Portfolio`;
+        
+        // Load project media
+        const projectMedia = document.querySelector('.project-media');
+        
+        if (project.videoUrl) {
+          // Create and load video
+          const video = document.createElement('video');
+          video.src = project.videoUrl;
+          video.autoplay = true;
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          
+          // Add loading placeholder
+          const placeholder = document.createElement('div');
+          placeholder.className = 'loading-placeholder';
+          projectMedia.appendChild(placeholder);
+          
+          // When video loaded, show it and hide placeholder
+          video.addEventListener('loadeddata', function() {
+            video.classList.add('loaded');
+            setTimeout(() => {
+              placeholder.remove();
+            }, 500);
+          });
+          
+          projectMedia.appendChild(video);
+        } else {
+          // Create and load image
+          const img = document.createElement('img');
+          img.src = project.fullImage || project.thumbnail;
+          img.alt = project.title;
+          
+          // Add loading placeholder
+          const placeholder = document.createElement('div');
+          placeholder.className = 'loading-placeholder';
+          projectMedia.appendChild(placeholder);
+          
+          // When image loaded, show it and hide placeholder
+          img.onload = function() {
+            img.classList.add('loaded');
+            setTimeout(() => {
+              placeholder.remove();
+            }, 500);
+          };
+          
+          projectMedia.appendChild(img);
+        }
+        
+        // Update project metadata
+        document.getElementById('project-category').textContent = project.category;
+        document.getElementById('project-year').textContent = project.year;
+        document.getElementById('project-title').textContent = project.title;
+        document.getElementById('project-description').textContent = project.description;
+        
+        // Update project tags
+        const tagsContainer = document.getElementById('project-tags');
+        tagsContainer.innerHTML = '';
+        
+        if (project.tags && project.tags.length) {
+          project.tags.forEach(tag => {
+            const tagElement = document.createElement('span');
+            tagElement.className = 'project-tag';
+            tagElement.textContent = tag;
+            tagsContainer.appendChild(tagElement);
+          });
+        }
+        
+        // Add project action if there's a link
+        const actionContainer = document.getElementById('project-action');
+        
+        if (project.link) {
+          actionContainer.innerHTML = `
+            <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-action-link">
+              <i class="fas fa-external-link-alt"></i>
+              <span>View Live Project</span>
+            </a>
+          `;
+        } else {
+          actionContainer.innerHTML = '';
+        }
+        
+        // Load related projects (same category)
+        const relatedProjectsContainer = document.getElementById('related-projects');
+        relatedProjectsContainer.innerHTML = '';
+        
+        const relatedProjects = projects.filter(p => 
+          p.category === project.category && p.id !== project.id
+        );
+        
+        // If not enough related projects, add some from other categories
+        let moreProjects = [];
+        if (relatedProjects.length < 4) {
+          moreProjects = projects.filter(p => 
+            p.category !== project.category && p.id !== project.id
+          ).slice(0, 4 - relatedProjects.length);
+        }
+        
+        // Combine and shuffle
+        const combinedProjects = [...relatedProjects, ...moreProjects];
+        combinedProjects.sort(() => Math.random() - 0.5);
+        
+        // Add to the DOM
+        combinedProjects.slice(0, 6).forEach(project => {
+          const projectCard = createProjectCard(project);
+          relatedProjectsContainer.appendChild(projectCard);
+        });
+        
+        // Setup slider controls
+        const slider = relatedProjectsContainer;
+        const leftArrow = document.querySelector('.slider-arrow.left-arrow');
+        const rightArrow = document.querySelector('.slider-arrow.right-arrow');
+        
+        leftArrow.addEventListener('click', () => {
+          slider.scrollBy({
+            left: -600,
+            behavior: 'smooth'
+          });
+        });
+        
+        rightArrow.addEventListener('click', () => {
+          slider.scrollBy({
+            left: 600,
+            behavior: 'smooth'
+          });
+        });
+        
+        // Helper function to create project card
+        function createProjectCard(project) {
+          const card = document.createElement('div');
+          card.className = 'project-card';
+          card.setAttribute('data-id', project.id);
+          
+          // Create card HTML
+          card.innerHTML = `
+            <div class="card-image-container">
+              <div class="loading-placeholder"></div>
+              <img class="card-image" src="${project.thumbnail}" alt="${project.title}" loading="lazy">
+              <div class="card-overlay">
+                <h3 class="card-title">${project.title}</h3>
+                <div class="card-meta">
+                  <span class="card-year">${project.year}</span>
+                  <div class="play-button">
+                    <i class="fas fa-play"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          
+          // Handle card image loading
+          const cardImage = card.querySelector('.card-image');
+          const placeholder = card.querySelector('.loading-placeholder');
+          
+          cardImage.onload = function() {
+            setTimeout(() => {
+              placeholder.style.opacity = 0;
+              setTimeout(() => placeholder.remove(), 300);
+            }, 300);
+          };
+          
+          // Add click event
+          card.addEventListener('click', () => {
+            window.location.href = `project.html?id=${project.id}`;
+          });
+          
+          return card;
+        }
+      });
+    </script>
+  </body>
+</html>
