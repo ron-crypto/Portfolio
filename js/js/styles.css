@@ -645,15 +645,15 @@
 }
 
 .profile-pic {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #e50914; /* Netflix red border */
 }
 
 .profile-text {
-  max-width: 600px;
+  max-width: 400px;
 }
 
 .profile-text h2 {
@@ -691,4 +691,27 @@
 .cv-button:hover {
   background-color: #0056b3; /* Darker shade of your theme color */
   transform: scale(1.05); /* Slight zoom effect */
+}
+@media (max-width: 768px) {
+  .profile-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-pic {
+    margin-bottom: 20px;
+  }
+
+  .profile-text {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .profile-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .profile-text p {
+    font-size: 0.95rem;
+  }
 }
